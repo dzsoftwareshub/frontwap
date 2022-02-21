@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/",(request,response)=>{
-  response.send("Get request");
+  response.render("index");
 });
 
 router.post("/",(request,response)=>{
