@@ -11,7 +11,10 @@ html
         li.nav-item
           a.nav-link(href="#") Log in
         li.nav-item
-          a.nav-link.btn.ml-3(href="#" style="background:#377DFF;color:#fff") Sign up
+          a.nav-link.btn.ml-3(
+            href="#" style="background:#377DFF;color:#fff"
+            data-target="#signup-modal"
+            data-toggle="modal") Sign up
     
     div.my-4
       h1.display-1 Leaderships
@@ -20,3 +23,5 @@ html
       
     div.d-flex.justify-content-end
       img(src="images/communicating-men.svg" width="50%")
+      
+      include signup
