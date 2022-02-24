@@ -1,9 +1,28 @@
-div.modal#signup-modal
+div.modal#signup-modal.animate__animated.animate__zoomIn
   div.modal-dialog.modal-lg.modal-dialog-centered
     div.modal-content
       div.modal-body.py-4.px-4
         div.row
           div.col-md-6
             img(src="images/signup.svg" width="100%")
+            
           div.col-md-6
-            h1.display-4 Register Now
+            h1.display-4(style="font-size:30px;") Register Now
+            form
+              div.form-group.mt-4
+                input.form-control(type="text" name="name" placeholder="Your name")
+                
+              div.form-group
+                input.form-control(type="email" name="email" placeholder="Email")
+              
+              div.form-group
+                input.form-control(type="number" name="mobile" placeholder="Mobile No")
+                
+              div.form-group
+                input.form-control(type="password" name="password" placeholder="password")
+                
+              div.form-group
+                button.btn.btn-primary(type="submit") Submit
+              
+              p Have already an account? 
+                a.request-login-modal(href="#") Login
