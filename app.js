@@ -8,6 +8,7 @@ const multipart = multer().none();
 
 const indexRouter = require("./routes/index.routes");
 const signupRouter = require("./routes/signup.routes");
+const companyRouter = require("./routes/company.routes");
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(multipart);
 
 app.use("/",indexRouter);
 app.use("/api/signup",signupRouter);
-
+app.use("/api/private/company",companyRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
