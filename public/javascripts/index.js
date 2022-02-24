@@ -15,3 +15,23 @@ $(document).ready(function(){
 		$("#login-modal").modal("hide");
 	});
 });
+
+// signup request
+$(document).ready(function(){
+	$("#signup-form").submit(function(e){
+		e.preventDefault();
+
+		$.ajax({
+				type: "POST",
+				url: "api/signup",
+				data: new FormData(this),
+				processData: false,
+				contentType: false,
+				cache: false,
+				success: function(response){
+					console.log(response);
+				}
+		});
+
+	});
+});
