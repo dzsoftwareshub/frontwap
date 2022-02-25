@@ -9,6 +9,7 @@ const multipart = multer().none();
 const indexRouter = require("./routes/index.routes");
 const signupRouter = require("./routes/signup.routes");
 const companyRouter = require("./routes/company.routes");
+const tokenService = require("./services/token.service");
 
 const app = express();
 
@@ -25,6 +26,21 @@ app.use(multipart);
 
 app.use("/",indexRouter);
 app.use("/api/signup",signupRouter);
+
+// implementing api security
+app.use(async (request,response,next)=>{
+  const token = await tokenService.verifyToken(request);
+  if(token.isVerified){
+    // user is valid
+    next();
+  }
+  else{
+    response.status(401);
+    response.json({
+      message: "Permision Denied"
+    });
+  }
+});
 app.use("/api/private/company",companyRouter);
 
 // catch 404 and forward to error handler

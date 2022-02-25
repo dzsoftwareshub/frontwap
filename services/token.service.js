@@ -1,5 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const issService = require("../services/iss.service");
 
 const secretkey = process.env.SECRET_KEY;
 
@@ -15,8 +16,35 @@ const create = async (request,response,expiresIn)=>{
   return token;
 }
 
-const verify = ()=>{
-
+const verify = (request)=>{
+  const token = request.body.token;
+  if(token){
+    try{
+      const tmp = jwt.verify(token,secretkey);
+      const requestCommingFrom = tmp.iss;
+      if(issService.indexOf(requestCommingFrom) != -1){
+        return {
+          isVerified: true,
+          data: tmp.data
+        }
+      }
+      else{
+        return {
+          isVerified: false
+        };
+      }
+    }
+    catch(error){
+      return {
+        isVerified: false
+      };
+    }
+  }
+  else{
+    return {
+      isVerified: false
+    };
+  }
 }
 
 module.exports = {
