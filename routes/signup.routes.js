@@ -1,17 +1,14 @@
-require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const secretkey = process.env.SECRET_KEY;
-const jwt = require("jsonwebtoken");
 
+const tokenService = require("../services/token.service");
+const httpService = require("../services/http.service");
 
-router.post("/",(request,response)=>{
-    const formdata = request.body;
-    const token = jwt.sign({
-      iss: "",
-      data: formdata
-    },secretkey,{expiresIn: 120});
-    console.log(token);
+router.post("/",async (request,response)=>{
+  const expiresIn = 120;
+  const token = await tokenService.createToken(request,response,expiresIn);
+
+  httpService.postRequest(token);
 });
 
 module.exports = router;
